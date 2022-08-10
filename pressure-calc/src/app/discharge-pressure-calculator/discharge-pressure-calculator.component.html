@@ -1,0 +1,43 @@
+<div [formGroup]="form">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Hose Diameter</mat-label>
+      <mat-select formControlName="hoseDiameter" required>
+        <mat-option *ngFor="let diameter of hoseDiameters" [value]="diameter">{{diameter}}</mat-option>
+      </mat-select>
+      <mat-icon matSuffix>straighten</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Hose Length</mat-label>
+      <input matInput type="number" step="25" min="0" formControlName="hoseLength" required>
+      <mat-icon matSuffix>straighten</mat-icon>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Nozzle Pressure</mat-label>
+      <input matInput type="number" step="25" min="0" formControlName="nozzlePressure" required>
+      <mat-icon matSuffix>shower</mat-icon>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>GPM</mat-label>
+      <input matInput type="number" min="0" formControlName="gpm" required>
+      <mat-icon matSuffix>air</mat-icon>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Change in Elevation</mat-label>
+      <input matInput type="number" formControlName="elevationChange" required>
+      <mat-icon matSuffix>height</mat-icon>
+    </mat-form-field>
+  </div>
+  <div>
+    Friction Loss: {{frictionLoss$ | async | number: '1.1-2'}}
+  </div>
+  <div>
+    Pump Discharge Pressure: {{dischargePressure$ | async | number: '1.1-2'}}
+  </div>
+</div>
