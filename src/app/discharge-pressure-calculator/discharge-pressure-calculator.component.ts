@@ -37,7 +37,6 @@ export class DischargePressureCalculatorComponent implements OnInit {
   constructor(private dischargePressureService: DischargePressureService) { }
 
   ngOnInit(): void {
-    console.log(this.hoseDiameters)
   }
 
 }
