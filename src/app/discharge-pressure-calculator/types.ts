@@ -5,4 +5,5 @@ export interface HoseLay {
     nozzlePressure: number;
     gpm: number;
     displayColor?: string;
+    elevationChange?: number;
 }
