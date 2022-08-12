@@ -1,0 +1,16 @@
+<mat-card [formGroup]="form" [ngStyle]="{'border-color': hoseLay.displayColor == 'white' ? 'black' : hoseLay.displayColor}" (click)="checkbox.toggle()">
+    <mat-checkbox formControlName="enabled" style="float: left" #checkbox (click)="$event.stopPropagation()"></mat-checkbox>
+    <mat-card-header>
+        <mat-card-title>{{hoseLay.name}}</mat-card-title>
+        <mat-card-subtitle>{{hoseLay.diameter}}"x{{hoseLay.length}}' | NP: {{hoseLay.nozzlePressure}} PSI</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div (click)="$event.stopPropagation()">
+            <mat-form-field appearance="fill">
+                <mat-label>GPM</mat-label>
+                <input formControlName="gpm" matInput type="number" min="0" required>
+                <mat-icon matSuffix>air</mat-icon>
+            </mat-form-field>
+        </div>
+    </mat-card-content>
+</mat-card>

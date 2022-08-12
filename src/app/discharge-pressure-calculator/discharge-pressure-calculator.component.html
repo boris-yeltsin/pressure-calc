@@ -1,4 +1,10 @@
 <div [formGroup]="form">
+  <div fxLayout="row wrap" fxLayoutAlign="start start" formArrayName="customHoseLays">
+    <app-standard-hose-lay-input *ngFor="let hoseLay of form.controls.customHoseLays.value; let i=index"
+                               [formControl]="form.controls.customHoseLays.at(i)">
+    </app-standard-hose-lay-input>
+  </div>
+  <app-custom-hose-lay-input></app-custom-hose-lay-input>
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Hose Diameter</mat-label>
