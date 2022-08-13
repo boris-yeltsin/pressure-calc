@@ -1,8 +1,11 @@
-<mat-card [formGroup]="form" [ngStyle]="{'border-color': hoseLay.displayColor == 'white' ? 'black' : hoseLay.displayColor}" (click)="checkbox.toggle()">
+<mat-card [formGroup]="form" [ngStyle]="{'border-color': val.hoseLay.displayColor == 'white' ? 'black' : val.hoseLay.displayColor}" (click)="checkbox.toggle()">
     <mat-checkbox formControlName="enabled" style="float: left" #checkbox (click)="$event.stopPropagation()"></mat-checkbox>
     <mat-card-header>
-        <mat-card-title>{{hoseLay.name}}</mat-card-title>
-        <mat-card-subtitle>{{hoseLay.diameter}}"x{{hoseLay.length}}' | NP: {{hoseLay.nozzlePressure}} PSI</mat-card-subtitle>
+        <mat-card-title>{{val.hoseLay.name}}</mat-card-title>
+        <mat-card-subtitle>
+            <div>{{val.hoseLay.diameter}}"x{{val.hoseLay.length}}' | NP: {{val.hoseLay.nozzlePressure}} PSI</div>
+            <div>Friction Loss: {{frictionLoss$ | async | number: '1.1-2'}}</div>
+        </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <div (click)="$event.stopPropagation()">

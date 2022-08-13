@@ -2,6 +2,9 @@
     <mat-checkbox formControlName="enabled" style="float: left" #checkbox (click)="$event.stopPropagation()"></mat-checkbox>
     <mat-card-header (click)="checkbox.toggle()">
         <mat-card-title>{{form.controls.name.value}}</mat-card-title>
+        <mat-card-subtitle>
+            <div *ngIf="form.controls.enabled.value">Friction Loss: {{frictionLoss$ | async | number: '1.1-2'}}</div>
+        </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content fxLayout="row wrap" fxLayoutGap="5px" *ngIf="form.controls.enabled.value">
         <mat-form-field appearance="fill">

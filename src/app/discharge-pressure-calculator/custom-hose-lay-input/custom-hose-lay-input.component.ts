@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
 import {StandardHoseLayInputValue} from "../standard-hose-lay-input/standard-hose-lay-input.component";
 import {DischargePressureService} from "../discharge-pressure.service";
-import {HoseLay} from "../types";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-custom-hose-lay-input',
@@ -15,6 +15,9 @@ import {HoseLay} from "../types";
   }]
 })
 export class CustomHoseLayInputComponent implements OnInit, ControlValueAccessor {
+  val!: StandardHoseLayInputValue;
+  readonly frictionLoss$: BehaviorSubject<number> = new BehaviorSubject(0);
+
   readonly form = this.fb.nonNullable.group({
     enabled: new FormControl(false),
     hoseDiameter: [1, Validators.required],
@@ -34,18 +37,21 @@ export class CustomHoseLayInputComponent implements OnInit, ControlValueAccessor
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe(change => {
-      const hoseLay: HoseLay = {
+      this.val.hoseLay = {
         diameter: change.hoseDiameter ?? 1,
         gpm: change.gpm ?? 0,
         length: change.hoseLength ?? 0,
         name: change.name ?? "",
         nozzlePressure: change.nozzlePressure ?? 0
       }
-      this.onChange({
-        enabled: change.enabled ?? false,
-        hoseLay: hoseLay
-      });
+      this.val.enabled = change.enabled ?? false
+      this.onChange(this.val);
       this.onTouched();
+      this.frictionLoss$.next(this.dischargePressureService.getFrictionLoss(
+          this.val.hoseLay.diameter,
+          this.val.hoseLay.length,
+          this.val.hoseLay.gpm
+      ));
     })
   }
 
@@ -58,6 +64,7 @@ export class CustomHoseLayInputComponent implements OnInit, ControlValueAccessor
   }
 
   writeValue(obj: StandardHoseLayInputValue): void {
+    this.val = obj;
     this.form.setValue({
       enabled: obj.enabled,
       hoseDiameter: obj.hoseLay.diameter,
