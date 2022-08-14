@@ -11,12 +11,14 @@ import { StandardHoseLayInputComponent } from './standard-hose-lay-input/standar
 import {MatCardModule} from "@angular/material/card";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { CalculatorOutputComponent } from './calculator-output/calculator-output.component';
 
 @NgModule({
   declarations: [
     DischargePressureCalculatorComponent,
     StandardHoseLayInputComponent,
-    CustomHoseLayInputComponent
+    CustomHoseLayInputComponent,
+    CalculatorOutputComponent
   ],
     imports: [
         CommonModule,

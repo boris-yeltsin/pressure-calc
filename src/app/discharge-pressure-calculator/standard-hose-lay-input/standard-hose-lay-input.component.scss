@@ -1,8 +1,26 @@
 mat-card {
-  min-width: 250px;
-  max-width: 400px;
-  border: 5px double;
-  margin: 5px;
+  width: 250px;
+  border: 2px solid;
+  margin: 2px;
+}
+
+mat-card-header {
   cursor: pointer;
   user-select: none;
+}
+
+mat-checkbox {
+  float: left;
+}
+
+.selected-hoselay {
+  background-color: #edffe7;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+:host ::ng-deep div.mat-card-header-text {
+  width: 100%;
 }

@@ -1,11 +1,26 @@
 mat-card {
-  min-width: 250px;
-  max-width: 460px;
-  border: 5px double;
-  margin: 5px;
+  width: 250px;
+  border: 2px solid silver;
+  margin: 2px;
 }
 
 mat-card-header {
   cursor: pointer;
   user-select: none;
+}
+
+mat-checkbox {
+  float: left;
+}
+
+.hose-diameter-input, .hose-length-input, .nozzle-pressure-input, .gpm-input, .elevation-input {
+  width: 100%;
+}
+
+.selected-hoselay {
+  background-color: #edffe7;
+}
+
+:host ::ng-deep div.mat-card-header-text {
+  width: 100%;
 }

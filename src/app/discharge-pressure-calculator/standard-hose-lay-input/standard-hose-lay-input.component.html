@@ -1,10 +1,10 @@
-<mat-card [formGroup]="form" [ngStyle]="{'border-color': val.hoseLay.displayColor == 'white' ? 'black' : val.hoseLay.displayColor}" (click)="checkbox.toggle()">
-    <mat-checkbox formControlName="enabled" style="float: left" #checkbox (click)="$event.stopPropagation()"></mat-checkbox>
-    <mat-card-header>
+<mat-card [formGroup]="form" [ngStyle]="{'border-color': val.hoseLay.displayColor}" [class.selected-hoselay]="checkbox.checked">
+    <mat-checkbox formControlName="enabled" #checkbox (click)="$event.stopPropagation()"></mat-checkbox>
+    <mat-card-header (click)="checkbox.toggle()" [title]="val.hoseLay.diameter + 'x' + val.hoseLay.length + ' | NP: ' + val.hoseLay.nozzlePressure + ' PSI'">
         <mat-card-title>{{val.hoseLay.name}}</mat-card-title>
         <mat-card-subtitle>
-            <div>{{val.hoseLay.diameter}}"x{{val.hoseLay.length}}' | NP: {{val.hoseLay.nozzlePressure}} PSI</div>
-            <div>Friction Loss: {{frictionLoss$ | async | number: '1.1-2'}}</div>
+            <div>Friction Loss: <div style="float: right">{{frictionLoss$ | async | number: '1.1-2'}} PSI</div></div>
+            <div>PDP: <div style="float: right">{{pdp$ | async | number: '1.1-2'}} PSI</div></div>
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
@@ -12,7 +12,7 @@
             <mat-form-field appearance="fill">
                 <mat-label>GPM</mat-label>
                 <input formControlName="gpm" matInput type="number" min="0" required>
-                <mat-icon matSuffix>air</mat-icon>
+                <mat-icon matSuffix>water</mat-icon>
             </mat-form-field>
         </div>
     </mat-card-content>

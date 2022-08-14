@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {HoseLay} from "./types";
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,17 @@ export class DischargePressureService {
   ): number {
     const head = elevationChange / 2;
     return nozzlePressure + head + frictionLoss + applianceFrictionLoss;
+  }
+
+  getDischargePressureForHoseLay(hoseLay: HoseLay): number {
+    const frictionLoss = this.getFrictionLoss(hoseLay.diameter, hoseLay.length, hoseLay.gpm);
+    return this.getDischargePressure(hoseLay.nozzlePressure, hoseLay.elevationChange ?? 0, frictionLoss);
+  }
+
+  getDischargePressureForHoseLays(hoseLays: HoseLay[]): number {
+    if (hoseLays.length == 0) {
+      return 0;
+    }
+    return Math.max(...hoseLays.map(hoseLay => this.getDischargePressureForHoseLay(hoseLay)));
   }
 }

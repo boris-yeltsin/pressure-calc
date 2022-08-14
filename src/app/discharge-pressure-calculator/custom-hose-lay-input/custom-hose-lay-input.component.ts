@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
 import {StandardHoseLayInputValue} from "../standard-hose-lay-input/standard-hose-lay-input.component";
 import {DischargePressureService} from "../discharge-pressure.service";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, combineLatest, map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-custom-hose-lay-input',
@@ -17,6 +17,13 @@ import {BehaviorSubject} from "rxjs";
 export class CustomHoseLayInputComponent implements OnInit, ControlValueAccessor {
   val!: StandardHoseLayInputValue;
   readonly frictionLoss$: BehaviorSubject<number> = new BehaviorSubject(0);
+  readonly pdp$: Observable<number> = this.frictionLoss$.pipe(
+      map(frictionLoss => this.dischargePressureService.getDischargePressure(
+          this.form.controls['nozzlePressure'].value,
+          this.form.controls['elevationChange'].value,
+          frictionLoss
+      ))
+  );
 
   readonly form = this.fb.nonNullable.group({
     enabled: new FormControl(false),

@@ -15,7 +15,7 @@ export const STANDARD_HOSE_LAYS: HoseLay[] = [
         diameter: 1.75,
         nozzlePressure: 100,
         gpm: 100,
-        displayColor: 'white'
+        displayColor: 'silver'
     },
     {
         name: 'Middle 1.75" Crosslay',

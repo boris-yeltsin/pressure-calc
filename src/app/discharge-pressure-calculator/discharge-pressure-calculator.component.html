@@ -1,53 +1,17 @@
+<h2>3810</h2>
 <div [formGroup]="form">
   <div fxLayout="row wrap" fxLayoutAlign="start start" formArrayName="customHoseLays">
     <app-standard-hose-lay-input *ngFor="let hoseLay of form.controls.standardHoseLays.value; let i=index"
                                [formControl]="form.controls.standardHoseLays.at(i)">
     </app-standard-hose-lay-input>
   </div>
-  <div fxLayout="column" fxLayoutAlign="start start" formArrayName="customHoseLays">
+  <div fxLayout="row wrap" fxLayoutAlign="start start" formArrayName="customHoseLays">
     <app-custom-hose-lay-input *ngFor="let hoseLay of form.controls.customHoseLays.value; let i=index"
                                [formControl]="form.controls.customHoseLays.at(i)">
     </app-custom-hose-lay-input>
-  </div>
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Hose Diameter</mat-label>
-      <mat-select formControlName="hoseDiameter" required>
-        <mat-option *ngFor="let diameter of hoseDiameters" [value]="diameter">{{diameter}}</mat-option>
-      </mat-select>
-      <mat-icon matSuffix>straighten</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Hose Length</mat-label>
-      <input matInput type="number" step="25" min="0" formControlName="hoseLength" required>
-      <mat-icon matSuffix>straighten</mat-icon>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Nozzle Pressure</mat-label>
-      <input matInput type="number" step="25" min="0" formControlName="nozzlePressure" required>
-      <mat-icon matSuffix>shower</mat-icon>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>GPM</mat-label>
-      <input matInput type="number" min="0" formControlName="gpm" required>
-      <mat-icon matSuffix>air</mat-icon>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Change in Elevation</mat-label>
-      <input matInput type="number" formControlName="elevationChange" required>
-      <mat-icon matSuffix>height</mat-icon>
-    </mat-form-field>
-  </div>
-  <div>
-    Friction Loss: {{frictionLoss$ | async | number: '1.1-2'}}
-  </div>
-  <div>
-    Pump Discharge Pressure: {{dischargePressure$ | async | number: '1.1-2'}}
+    <app-calculator-output [selectedHoseLays]="(selectedHoseLays$ | async)!">
+      <div>PDP: 0 PSI</div>
+      <div>Friction Loss: 0 PSI</div>
+    </app-calculator-output>
   </div>
 </div>

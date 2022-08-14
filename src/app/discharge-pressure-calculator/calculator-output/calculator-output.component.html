@@ -1,0 +1,20 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Max. PDP</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <ul class="discharge-pressure">
+            <li>{{dischargePressure | number: '1.1-2'}} PSI</li>
+        </ul>
+    </mat-card-content>
+    <mat-card-header>
+        <mat-card-title>Selected Hose Lays</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <ul>
+            <li *ngFor="let hoseLay of selectedHoseLays">
+                {{hoseLay.name}}
+            </li>
+        </ul>
+    </mat-card-content>
+</mat-card>

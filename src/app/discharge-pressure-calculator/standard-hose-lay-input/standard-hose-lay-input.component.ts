@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HoseLay} from "../types";
 import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, map, Observable} from "rxjs";
 import {DischargePressureService} from "../discharge-pressure.service";
 
 export interface StandardHoseLayInputValue {
@@ -22,13 +22,20 @@ export interface StandardHoseLayInputValue {
 export class StandardHoseLayInputComponent implements OnInit, ControlValueAccessor {
   val!: StandardHoseLayInputValue;
   readonly frictionLoss$: BehaviorSubject<number> = new BehaviorSubject(0);
+  readonly pdp$: Observable<number> = this.frictionLoss$.pipe(
+      map(frictionLoss => this.dischargePressureService.getDischargePressure(
+          this.val.hoseLay.nozzlePressure,
+          this.val.hoseLay.elevationChange ?? 0,
+          frictionLoss
+      ))
+  );
 
   readonly form: FormGroup = new FormGroup({
     enabled: new FormControl(false),
     gpm: new FormControl(1),
   });
 
-  // Unclear why the following doesn't work. Does not emit anything on the very first
+  // Unclear why the following doesn't work. Does not emit anything on the first
   // value change, leaving the displayed friction loss in the template blank. Workaround
   // is to subscribe to valueChanges and push calculated friction loss to a BehaviorSubject.
   // readonly frictionLoss$: Observable<number> = this.form.valueChanges.pipe(
