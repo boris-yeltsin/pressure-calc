@@ -2,7 +2,8 @@ mat-card {
   border: 3px double black;
   margin: 2px;
   min-height: calc(100% - 42px);
-  background-color: #fff5d9
+  background-color: #fff5d9;
+  min-width: 250px;
 }
 
 .discharge-pressure {
