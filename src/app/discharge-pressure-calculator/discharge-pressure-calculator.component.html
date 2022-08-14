@@ -1,15 +1,15 @@
 <h2>3810</h2>
 <div [formGroup]="form">
   <div fxLayout="row wrap" fxLayoutAlign="start start" formArrayName="customHoseLays">
-    <app-standard-hose-lay-input *ngFor="let hoseLay of form.controls.standardHoseLays.value; let i=index"
+    <app-standard-hose-lay-input fxFlex *ngFor="let hoseLay of form.controls.standardHoseLays.value; let i=index"
                                [formControl]="form.controls.standardHoseLays.at(i)">
     </app-standard-hose-lay-input>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="start start" formArrayName="customHoseLays">
-    <app-custom-hose-lay-input *ngFor="let hoseLay of form.controls.customHoseLays.value; let i=index"
+  <div fxLayout="row wrap" fxLayoutAlign="stretch stretch" formArrayName="customHoseLays">
+    <app-custom-hose-lay-input fxFlex *ngFor="let hoseLay of form.controls.customHoseLays.value; let i=index"
                                [formControl]="form.controls.customHoseLays.at(i)">
     </app-custom-hose-lay-input>
-    <app-calculator-output [selectedHoseLays]="(selectedHoseLays$ | async)!">
+    <app-calculator-output fxFlex [selectedHoseLays]="(selectedHoseLays$ | async)!">
       <div>PDP: 0 PSI</div>
       <div>Friction Loss: 0 PSI</div>
     </app-calculator-output>
