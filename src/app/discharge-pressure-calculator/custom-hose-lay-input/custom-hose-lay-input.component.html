@@ -7,7 +7,7 @@
             <div>PDP: <div style="float: right">{{pdp$ | async | number: '1.1-2'}} PSI</div></div>
         </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content fxLayout="row wrap" fxLayoutGap="5px">
+    <mat-card-content fxLayout="column">
         <mat-form-field appearance="fill" class="hose-diameter-input">
             <mat-label>Hose Diameter</mat-label>
             <mat-select formControlName="hoseDiameter" required>
@@ -29,6 +29,11 @@
             <mat-label>GPM</mat-label>
             <input matInput type="number" min="0" formControlName="gpm" required>
             <mat-icon matSuffix>water</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="elevation-input">
+            <mat-label>Change in Elevation</mat-label>
+            <input matInput type="number" formControlName="elevationChange" required>
+            <mat-icon matSuffix>height</mat-icon>
         </mat-form-field>
         <mat-form-field appearance="fill" class="elevation-input">
             <mat-label>Change in Elevation</mat-label>

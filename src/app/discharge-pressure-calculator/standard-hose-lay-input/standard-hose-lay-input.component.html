@@ -7,13 +7,11 @@
             <div>PDP: <div style="float: right">{{pdp$ | async | number: '1.1-2'}} PSI</div></div>
         </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
-        <div (click)="$event.stopPropagation()">
-            <mat-form-field appearance="fill">
-                <mat-label>GPM</mat-label>
-                <input formControlName="gpm" matInput type="number" min="0" required>
-                <mat-icon matSuffix>water</mat-icon>
-            </mat-form-field>
-        </div>
+    <mat-card-content (click)="$event.stopPropagation()">
+        <mat-form-field appearance="fill">
+            <mat-label>GPM</mat-label>
+            <input formControlName="gpm" matInput type="number" min="0" required>
+            <mat-icon matSuffix>water</mat-icon>
+        </mat-form-field>
     </mat-card-content>
 </mat-card>
